@@ -124,15 +124,15 @@ void printTable() {
 
 int main(int argc, char *argv[]) {
 
-    char ch;
-    int nMines; // the number of the remaining mines
+    char modeFlag;
+    int mineNumber; // the number of the remaining mines
     int i,j,r,c,value, rows[8], columns[8];
 
 newGame:
     // the number of mines
-    nMines = 10;
+    mineNumber = 10;
     if(argc == 2) {
-        nMines = atoi(argv[1]);
+        mineNumber = atoi(argv[1]);
     }
     srand (time(NULL));						// random seed
     // setting cursor
@@ -143,7 +143,7 @@ newGame:
         for(j = 0; j < 10; j++)
             tableArray[i][j] = 0;
 
-    for(i = 0; i < nMines; i++) {
+    for(i = 0; i < mineNumber; i++) {
         /* initialize random seed: */
 
         r = rand() % 10;					// it generates a integer in the range 0 to 9
@@ -186,13 +186,13 @@ newGame:
     }
 
     //
-    while(nMines != 0) {			// when nMines becomes 0 you will win the game
+    while(mineNumber != 0) {			// when mineNumber becomes 0 you will win the game
         printTable();
 
-        ch = getch();
+        modeFlag = getch();
         // cursor direction
         char direction;
-        switch (ch) {
+        switch (modeFlag) {
 
         // flag
         case 'f':
@@ -216,20 +216,20 @@ flagMode:
                 } else if(direction == '6') {
                     x = ++x % MAX;
                 } else if(direction == 'c' || direction == 'C') {
-                    goto check_mode;
+                    goto checkMode;
                 } else if(direction == '\n') {
                     value = tableArray[y][x];
 
                     if (value == 99) {				// mine case
                         tableArray[y][x] += 1;
-                        nMines -= 1;				// mine found
+                        mineNumber -= 1;				// mine found
                     } else if(value >= 0 && value <= 8) {	// number of mines case (the next cell is a mine)
                         tableArray[y][x] += 20;
                     } else if(value >= 20 && value <= 28) {
                         tableArray[y][x] -= 20;
                     }
 
-                    if(nMines == 0)
+                    if(mineNumber == 0)
                         break;
                 }
             } while (direction != 'q' && direction != 'Q');
@@ -241,7 +241,7 @@ flagMode:
         case 'c':
         case 'C':
 
-check_mode:
+checkMode:
             gameMode = 2;
             do {
                 printTable();
@@ -301,7 +301,7 @@ endOfGame:
     printTable();
     printf("\nGAME OVER\n");
 
-    if(nMines == 0)
+    if(mineNumber == 0)
         printf("you won!!!!\n");
 
     else
@@ -309,11 +309,11 @@ endOfGame:
 
     do {
         printf("Are you sure to exit? (y or n)? ");
-        ch = getch();
+        modeFlag = getch();
         putchar('\n');
-        if(ch == 'y' || ch == 'Y') {
+        if(modeFlag == 'y' || modeFlag == 'Y') {
             break;
-        } else if(ch == 'n' || ch == 'N') {
+        } else if(modeFlag == 'n' || modeFlag == 'N') {
             goto newGame;
         }
         printf("Please answer y or n\n");
