@@ -289,38 +289,38 @@ checkMode:
         // exit
         case 'q':
         case 'Q':
-            goto endOfGame;
+
+endOfGame:
+            gameMode = 0;
+            printTable();
+            printf("\nGAME OVER\n");
+
+            if(mineNumber == 0)
+                    printf("you won!!!!\n");
+
+            else
+                    printf("BOOM! you LOOSE!\n");
+
+            do{
+                    printf("Are you sure to exit? (y or n)? ");
+                    modeFlag = getch();
+                    putchar('\n');
+                    if(modeFlag == 'y' || modeFlag == 'Y') {
+                            break;
+                    } else if(modeFlag == 'n' || modeFlag == 'N') {
+                            goto newGame;
+                    }
+                    printf("Please answer y or n\n");
+            } while(1);
+          
+            printf("See you next time!\n");
+            fflush(stdin);
+            return 0;
 
         default:
             break;
         }
     }
-
-endOfGame:
-    gameMode = 0;
-    printTable();
-    printf("\nGAME OVER\n");
-
-    if(mineNumber == 0)
-        printf("you won!!!!\n");
-
-    else
-        printf("BOOM! you LOOSE!\n");
-
-    do {
-        printf("Are you sure to exit? (y or n)? ");
-        modeFlag = getch();
-        putchar('\n');
-        if(modeFlag == 'y' || modeFlag == 'Y') {
-            break;
-        } else if(modeFlag == 'n' || modeFlag == 'N') {
-            goto newGame;
-        }
-        printf("Please answer y or n\n");
-    } while(1);
-    printf("See you next time!\n");
-
-    fflush(stdin);
 
     return 0;
 }
