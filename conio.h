@@ -7,11 +7,11 @@ void initTermios(int echo);
 void resetTermios(void);
 
 /* Read 1 character - echo defines echo mode */
-char getch_(int echo);
+char getChar_(int echo);
 
 /* Read 1 character without echo */
-char getch(void);
+char getChar(void);
 
 /* Read 1 character with echo */
-char getche(void);
+char getCharEcho(void);
 

@@ -17,7 +17,7 @@ void resetTermios(void) {
 }
 
 /* Read 1 character - echo defines echo mode */
-char getch_(int echo) {
+char getChar_(int echo) {
     char ch;
     initTermios(echo);
     ch = getchar();
@@ -45,11 +45,11 @@ char getch_(int echo) {
 
 /* Read 1 character without echo */
 char getch(void) {
-    return getch_(0);
+    return getChar_(0);
 }
 
 /* Read 1 character with echo */
 char getche(void) {
-    return getch_(1);
+    return getChar_(1);
 }
 
